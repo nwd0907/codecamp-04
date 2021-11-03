@@ -19,8 +19,10 @@ import {
   Youtube,
   Zipcode,
   ZipcodeWrapper,
-  UploadButton
+  UploadButton,
+  Error
 } from "../../../styles/BoardsNew";
+import { useState } from 'react'
 
 export default function BoardsNewPage() {
   const [myWriter, setMyWriter] = useState("");
@@ -86,19 +88,23 @@ export default function BoardsNewPage() {
         <InputWrapper>
           <Label>작성자</Label>
           <Writer type="text" placeholder="이름을 적어주세요." onChange={onChangeMyWriter} />
+          <Error>{myWriterError}</Error>
         </InputWrapper>
         <InputWrapper>
           <Label>비밀번호</Label>
           <Password type="password" onChange={onChangeMyPassword} />
+          <Error>{myPasswordError}</Error>
         </InputWrapper>
       </WriterWrapper>
       <InputWrapper>
         <Label>제목</Label>
         <Subject type="text" placeholder="제목을 작성해주세요." onChange={onChangeMyTitle} />
+        <Error>{myTitleError}</Error>
       </InputWrapper>
       <InputWrapper>
         <Label>내용</Label>
         <Contents placeholder="내용을 작성해주세요." onChange={onChangeMyContents} />
+        <Error>{myContentsError}</Error>
       </InputWrapper>
       <InputWrapper>
         <Label>주소</Label>
