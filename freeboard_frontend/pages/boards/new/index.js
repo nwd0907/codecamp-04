@@ -23,26 +23,82 @@ import {
 } from "../../../styles/BoardsNew";
 
 export default function BoardsNewPage() {
+  const [myWriter, setMyWriter] = useState("");
+  const [myPassword, setMyPassword] = useState("");
+  const [myTitle, setMyTitle] = useState("");
+  const [myContents, setMyContents] = useState("");
+
+  const [myWriterError, setMyWriterError] = useState("");
+  const [myPasswordError, setMyPasswordError] = useState("");
+  const [myTitleError, setMyTitleError] = useState("");
+  const [myContentsError, setMyContentsError] = useState("");
+
+  function onChangeMyWriter(event) {
+    setMyWriter(event.target.value);
+    if (event.target.value !== "") {
+      setMyWriterError("");
+    }
+  }
+
+  function onChangeMyPassword(event) {
+    setMyPassword(event.target.value);
+    if (event.target.value !== "") {
+      setMyPasswordError("");
+    }
+  }
+
+  function onChangeMyTitle(event) {
+    setMyTitle(event.target.value);
+    if (event.target.value !== "") {
+      setMyTitleError("");
+    }
+  }
+
+  function onChangeMyContents(event) {
+    setMyContents(event.target.value);
+    if (event.target.value !== "") {
+      setMyContentsError("");
+    }
+  }
+
+  async function onClickSubmit() {
+    if (myWriter === "") {
+      setMyWriterError("작성자를 입력해주세요.");
+    }
+    if (myPassword === "") {
+      setMyPasswordError("비밀번호를 입력해주세요.");
+    }
+    if (myTitle === "") {
+      setMyTitleError("제목을 입력해주세요.");
+    }
+    if (myContents === "") {
+      setMyContentsError("내용을 입력해주세요.");
+    }
+    if (myWriter !== "" && myPassword !== "" && myTitle !== "" && myContents !== "") {
+      alert('게시물을 등록합니다!')
+    }
+  }
+
   return (
     <Wrapper>
       <Title>게시판 등록</Title>
       <WriterWrapper>
         <InputWrapper>
           <Label>작성자</Label>
-          <Writer type="text" placeholder="이름을 적어주세요." />
+          <Writer type="text" placeholder="이름을 적어주세요." onChange={onChangeMyWriter} />
         </InputWrapper>
         <InputWrapper>
           <Label>비밀번호</Label>
-          <Password type="password" />
+          <Password type="password" onChange={onChangeMyPassword} />
         </InputWrapper>
       </WriterWrapper>
       <InputWrapper>
         <Label>제목</Label>
-        <Subject type="text" placeholder="제목을 작성해주세요." />
+        <Subject type="text" placeholder="제목을 작성해주세요." onChange={onChangeMyTitle} />
       </InputWrapper>
       <InputWrapper>
         <Label>내용</Label>
-        <Contents placeholder="내용을 작성해주세요." />
+        <Contents placeholder="내용을 작성해주세요." onChange={onChangeMyContents} />
       </InputWrapper>
       <InputWrapper>
         <Label>주소</Label>
@@ -80,7 +136,7 @@ export default function BoardsNewPage() {
         <RadioLabel htmlFor="image">사진</RadioLabel>
       </OptionWrapper>
       <ButtonWrapper>
-        <SubmitButton>등록하기</SubmitButton>
+        <SubmitButton onClick={onClickSubmit}>등록하기</SubmitButton>
       </ButtonWrapper>
     </Wrapper>
   );
