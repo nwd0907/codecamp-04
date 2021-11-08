@@ -24,6 +24,7 @@ import {
 } from "../../../styles/BoardsNew";
 import { useState } from 'react'
 import { useMutation, gql } from "@apollo/client";
+import { useRouter } from 'next/router'
 
 const CREATE_BOARD = gql`
   mutation createBoard($createBoardInput: CreateBoardInput!) {
@@ -34,6 +35,7 @@ const CREATE_BOARD = gql`
 `;
 
 export default function BoardsNewPage() {
+  const router = useRouter()
   const [myWriter, setMyWriter] = useState("");
   const [myPassword, setMyPassword] = useState("");
   const [myTitle, setMyTitle] = useState("");
@@ -88,17 +90,17 @@ export default function BoardsNewPage() {
       setMyContentsError("내용을 입력해주세요.");
     }
     if (myWriter !== "" && myPassword !== "" && myTitle !== "" && myContents !== "") {
-      const result = await createBoard({
-        variables: {
-          createBoardInput: {
+      const result = await createBoard({ 
+        variables: { 
+          createBoardInput: { 
             writer: myWriter,
             password: myPassword,
             title: myTitle,
-            contents: myContents,
-          },
-        },
+            contents: myContents
+          }
+        }
       });
-      console.log(result.data.createBoard._id)
+      router.push(`/boards/${result.data.createBoard._id}`)
     }
   }
 
