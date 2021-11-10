@@ -6,6 +6,7 @@ import { useRouter } from 'next/router'
 
 export default function BoardWrite(){
     const router = useRouter()
+
     const [myWriter, setMyWriter] = useState("");
     const [myPassword, setMyPassword] = useState("");
     const [myTitle, setMyTitle] = useState("");
@@ -73,19 +74,19 @@ export default function BoardWrite(){
     }
   
     async function onClickSubmit() {
-      if (myWriter === "") {
+      if (!myWriter) {
         setMyWriterError("작성자를 입력해주세요.");
       }
-      if (myPassword === "") {
+      if (!myPassword) {
         setMyPasswordError("비밀번호를 입력해주세요.");
       }
-      if (myTitle === "") {
+      if (!myTitle) {
         setMyTitleError("제목을 입력해주세요.");
       }
-      if (myContents === "") {
+      if (!myContents) {
         setMyContentsError("내용을 입력해주세요.");
       }
-      if (myWriter !== "" && myPassword !== "" && myTitle !== "" && myContents !== "") {
+      if (myWriter && myPassword && myTitle && myContents) {
         const result = await createBoard({ 
           variables: { 
             createBoardInput: { 

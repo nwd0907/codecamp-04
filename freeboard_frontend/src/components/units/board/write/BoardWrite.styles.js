@@ -163,10 +163,10 @@ export const SubmitButton = styled.button`
   font-weight: 500;
   margin-left: 12px;
   margin-right: 12px;
-  background-color: ${(props) => props.isActive === true ? 'yellow' : 'none'};
+  background-color: ${(props) => props.isActive ? 'yellow' : 'none'};
   
   :hover {
-    cursor: ${(props) => props.isActive === true ? 'pointer' : 'default'};
+    cursor: ${(props) => props.isActive ? 'pointer' : 'default'};
   }
 `;
 
