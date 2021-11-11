@@ -1,3 +1,4 @@
+import { getDate } from "../../../../commons/libraries/utils";
 import {
   Wrapper,
   TableTop,
@@ -27,7 +28,7 @@ export default function BoardListUI(props) {
           <ColumnBasic>{index + 1}</ColumnBasic>
           <ColumnTitle id={el._id} onClick={props.onClickMoveToBoardDetail}>{el.title}</ColumnTitle>
           <ColumnBasic>{el.writer}</ColumnBasic>
-          <ColumnBasic>{el.createdAt}</ColumnBasic>
+          <ColumnBasic>{getDate(el.createdAt)}</ColumnBasic>
         </Row>
       ))}
       <TableBottom />
