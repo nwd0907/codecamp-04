@@ -27,7 +27,7 @@ import { IBoardWriteUIProps } from "./BoardWrite.types";
 export default function BoardWriteUI(props: IBoardWriteUIProps){
     return (
         <Wrapper>
-            <Title>게시판 등록</Title>
+            <Title>{props.isEdit ? "게시판 수정" : "게시판 등록"}</Title>
             <WriterWrapper>
                 <InputWrapper>
                     <Label>작성자</Label>
@@ -88,8 +88,8 @@ export default function BoardWriteUI(props: IBoardWriteUIProps){
             <ButtonWrapper>
                 <SubmitButton 
                     onClick={props.isEdit ? props.onClickUpdate : props.onClickSubmit} 
-                    disabled={!props.isActive}
-                    isActive={props.isActive}
+                    disabled={props.isEdit ? false : !props.isActive}
+                    isActive={props.isEdit ? true : !props.isActive}
                 >
                     {props.isEdit ? "수정하기" : "등록하기"}
                 </SubmitButton>
