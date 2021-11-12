@@ -22,8 +22,9 @@ import {
     UploadButton,
     Error
 } from "./BoardWrite.styles";
+import { IBoardWriteUIProps } from "./BoardWrite.types";
 
-export default function BoardWriteUI(props){
+export default function BoardWriteUI(props: IBoardWriteUIProps){
     return (
         <Wrapper>
             <Title>게시판 등록</Title>
