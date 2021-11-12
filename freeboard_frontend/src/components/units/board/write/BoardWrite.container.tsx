@@ -103,8 +103,10 @@ export default function BoardWrite(props: IBoardWriteProps){
       }
     }
 
+   
+
     async function onClickUpdate() {
-      if (!myTitle && !myContents) {
+       if (!myTitle && !myContents) {
         alert("수정된 내용이 없습니다.");
         return
       }
