@@ -141,6 +141,7 @@ export default function BoardWrite(props: IBoardWriteProps){
           onClickUpdate={onClickUpdate}
           isActive={isActive}
           isEdit={props.isEdit}
+          data={props.data}
         />
     )
 }

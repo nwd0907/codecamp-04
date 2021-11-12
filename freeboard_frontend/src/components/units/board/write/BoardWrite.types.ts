@@ -23,6 +23,7 @@ export interface IBoardWriteUIProps {
   onClickUpdate: (event: MouseEvent<HTMLButtonElement>) => void
   isActive: boolean
   isEdit?: boolean
+  data?: any
 }
 
 export interface ISubmitButtonProps {

@@ -31,7 +31,7 @@ export default function BoardWriteUI(props: IBoardWriteUIProps){
             <WriterWrapper>
                 <InputWrapper>
                     <Label>작성자</Label>
-                    <Writer type="text" placeholder="이름을 적어주세요." onChange={props.onChangeMyWriter} />
+                    <Writer type="text" placeholder="이름을 적어주세요." onChange={props.onChangeMyWriter} defaultValue={props.data?.fetchBoard.writer} />
                     <Error>{props.myWriterError}</Error>
                 </InputWrapper>
                 <InputWrapper>
@@ -42,12 +42,12 @@ export default function BoardWriteUI(props: IBoardWriteUIProps){
             </WriterWrapper>
             <InputWrapper>
                 <Label>제목</Label>
-                <Subject type="text" placeholder="제목을 작성해주세요." onChange={props.onChangeMyTitle} />
+                <Subject type="text" placeholder="제목을 작성해주세요." onChange={props.onChangeMyTitle} defaultValue={props.data?.fetchBoard.title} />
                 <Error>{props.myTitleError}</Error>
             </InputWrapper>
             <InputWrapper>
                 <Label>내용</Label>
-                <Contents placeholder="내용을 작성해주세요." onChange={props.onChangeMyContents} />
+                <Contents placeholder="내용을 작성해주세요." onChange={props.onChangeMyContents} defaultValue={props.data?.fetchBoard.contents} />
                 <Error>{props.myContentsError}</Error>
             </InputWrapper>
             <InputWrapper>
