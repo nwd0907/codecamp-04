@@ -24,7 +24,6 @@ import {
   Star,
   UpdateIcon,
   Writer,
-  PasswordInput,
 } from "./BoardCommentList.styles";
 import { IBoardCommentListUIItemProps } from "./BoardCommentList.types";
 
@@ -72,6 +71,7 @@ export default function BoardCommentListUIItem(
             <MainWrapper>
               <WriterWrapper>
                 <Writer>{props.el?.writer}</Writer>
+                <Star value={props.el?.rating} disabled />
               </WriterWrapper>
               <Contents>{props.el?.contents}</Contents>
             </MainWrapper>
@@ -90,11 +90,7 @@ export default function BoardCommentListUIItem(
         </ItemWrapper>
       )}
       {isEdit && (
-        <BoardCommentWrite
-          isEdit={isEdit}
-          setIsEdit={setIsEdit}
-          el={props.el}
-        />
+        <BoardCommentWrite isEdit={true} setIsEdit={setIsEdit} el={props.el} />
       )}
     </>
   );

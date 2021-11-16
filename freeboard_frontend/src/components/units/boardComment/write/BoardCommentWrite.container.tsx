@@ -6,10 +6,7 @@ import {
   IMutationCreateBoardCommentArgs,
   IMutationUpdateBoardCommentArgs,
 } from "../../../../commons/types/generated/types";
-import {
-  DELETE_BOARD_COMMENT,
-  FETCH_BOARD_COMMENTS,
-} from "../list/BoardCommentList.queries";
+import { FETCH_BOARD_COMMENTS } from "../list/BoardCommentList.queries";
 import BoardCommentWriteUI from "./BoardCommentWrite.presenter";
 import {
   CREATE_BOARD_COMMENT,
@@ -22,6 +19,7 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
   const [myWriter, setMyWriter] = useState("");
   const [myPassword, setMyPassword] = useState("");
   const [myContents, setMyContents] = useState("");
+  const [myStar, setMyStar] = useState(0);
 
   const [createBoardComment] =
     useMutation<
@@ -46,6 +44,10 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
     setMyContents(event.target.value);
   }
 
+  function onChangeStar(value: number) {
+    setMyStar(value);
+  }
+
   async function onClickWrite() {
     try {
       await createBoardComment({
@@ -54,7 +56,7 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
             writer: myWriter,
             password: myPassword,
             contents: myContents,
-            rating: 0,
+            rating: myStar,
           },
           boardId: String(router.query.boardId),
         },
@@ -66,7 +68,7 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
         ],
       });
     } catch (error) {
-      alert(error.message);
+      if (error instanceof Error) alert(error.message);
     }
   }
 
@@ -108,6 +110,7 @@ export default function BoardCommentWrite(props: IBoardCommentWriteProps) {
       onChangeMyContents={onChangeMyContents}
       onClickWrite={onClickWrite}
       onClickUpdate={onClickUpdate}
+      onChangeStar={onChangeStar}
       isEdit={props.isEdit}
       el={props.el}
       myContents={myContents}
