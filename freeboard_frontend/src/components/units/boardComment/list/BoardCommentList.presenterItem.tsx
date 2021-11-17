@@ -61,7 +61,7 @@ export default function BoardCommentListUIItem(
         ],
       });
     } catch (error) {
-      alert(error.message);
+      Modal.error({ content: error.message });
     }
   }
 
