@@ -8,15 +8,20 @@ const FETCH_BOARD = gql`
       writer
       title
       contents
+      youtubeUrl
+      boardAddress {
+        zipcode
+        address
+        addressDetail
+      }
     }
   }
 `;
 
-
 export default function BoardsEditPage() {
   const router = useRouter();
-  const { data } = useQuery(FETCH_BOARD,{ 
-    variables: { boardId: router.query.boardId } 
+  const { data } = useQuery(FETCH_BOARD, {
+    variables: { boardId: router.query.boardId },
   });
 
   return <BoardWrite isEdit={true} data={data} />;
