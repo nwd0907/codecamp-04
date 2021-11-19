@@ -26,10 +26,6 @@ export const Row = styled.div`
   }
 `;
 
-export const TextToken = styled.span`
-  color: ${(props) => (props.isMatched ? "red" : "black")};
-`;
-
 export const ColumnHeaderBasic = styled.div`
   width: 10%;
   text-align: center;
@@ -58,7 +54,7 @@ export const ColumnTitle = styled.div`
 export const Footer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   padding-top: 50px;
 `;
 
