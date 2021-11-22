@@ -5,6 +5,7 @@ import {
 
 export interface IBoardCommentListUIProps {
   data?: Pick<IQuery, "fetchBoardComments">;
+  onLoadMore: () => void;
 }
 
 export interface IBoardCommentListUIItemProps {
