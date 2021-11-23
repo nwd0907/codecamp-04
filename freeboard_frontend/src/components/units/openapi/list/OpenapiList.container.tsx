@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import OpenapiListUI from "./OpenapiList.presenter";
 
 export default function OpenapiList() {
-  const [imgUrls, setImgUrls] = useState<string[]>([]);
+  const [imgUrls, setImgUrls] = useState<string[]>(["a", "2.jpg", "3.png", ...]);
 
   useEffect(() => {
     const getImg = async () => {
