@@ -1,12 +1,17 @@
 import { useEffect, useState } from "react";
 import MyfirebaseListUI from "./MyfirebaseList.presenter";
-import { collection, getFirestore, getDocs } from "firebase/firestore/lite";
+import {
+  collection,
+  getFirestore,
+  getDocs,
+  DocumentData,
+} from "firebase/firestore/lite";
 import { firebaseApp } from "../../../../../pages/_app";
 import { useRouter } from "next/router";
 
 export default function MyfirebaseList() {
   const router = useRouter();
-  const [dataBoards, setDataBoards] = useState<any>([]);
+  const [dataBoards, setDataBoards] = useState<DocumentData[]>([]);
 
   useEffect(() => {
     async function fetchBoards() {

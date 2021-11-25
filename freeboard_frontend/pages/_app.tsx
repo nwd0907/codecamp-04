@@ -1,6 +1,12 @@
 import "../styles/globals.css";
 import "antd/dist/antd.css";
-import { ApolloClient, ApolloProvider, InMemoryCache } from "@apollo/client";
+import {
+  ApolloClient,
+  ApolloLink,
+  ApolloProvider,
+  InMemoryCache,
+} from "@apollo/client";
+import { createUploadLink } from "apollo-upload-client";
 import { AppProps } from "next/dist/shared/lib/router/router";
 import Layout from "../src/components/commons/layout";
 import { globalStyles } from "../src/commons/styles/globalStyles";
@@ -25,8 +31,12 @@ const firebaseConfig = {
 export const firebaseApp = initializeApp(firebaseConfig);
 
 function MyApp({ Component, pageProps }: AppProps) {
-  const client = new ApolloClient({
+  const uploadLink = createUploadLink({
     uri: "http://backend04.codebootcamp.co.kr/graphql",
+  });
+
+  const client = new ApolloClient({
+    link: ApolloLink.from([uploadLink as unknown as ApolloLink]),
     cache: new InMemoryCache(),
   });
 
