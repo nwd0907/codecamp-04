@@ -5,8 +5,8 @@ import LayoutNavigationUI from "./LayoutNavigation.presenter";
 export default function LayoutNavigation() {
   const router = useRouter();
 
-  function onClickMenu(event) {
-    router.push(event.target.id);
+  function onClickMenu(event: MouseEvent<HTMLDivElement>) {
+    if (event.target instanceof Element) router.push(event.target.id);
   }
 
   return <LayoutNavigationUI onClickMenu={onClickMenu} />;

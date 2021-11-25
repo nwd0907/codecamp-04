@@ -4,6 +4,10 @@ import { ILayoutNavigationUIProps } from "./LayoutNavigation.types";
 export default function LayoutNavigationUI(props: ILayoutNavigationUIProps) {
   return (
     <Wrapper>
+      <MenuItem id="/myfirebase" onClick={props.onClickMenu}>
+        파이어베이스실습
+      </MenuItem>
+      <>|</>
       <MenuItem id="/openapis" onClick={props.onClickMenu}>
         라이브강아지
       </MenuItem>
