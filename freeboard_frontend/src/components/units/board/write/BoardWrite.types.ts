@@ -15,6 +15,7 @@ export interface IMyUpdateBoardInput {
     address?: string;
     addressDetail?: string;
   };
+  images?: string[];
 }
 
 export interface IBoardWriteUIProps {
@@ -32,6 +33,7 @@ export interface IBoardWriteUIProps {
   onClickUpdate: () => void;
   onClickAddressSearch: () => void;
   onCompleteAddressSearch: (data: any) => void;
+  onChangeFileUrls: (fileUrls: string, index: number) => void;
   isActive: boolean;
   isEdit?: boolean;
   isOpen: boolean;
@@ -39,6 +41,7 @@ export interface IBoardWriteUIProps {
   zipcode: string;
   address: string;
   addressDetail: string;
+  fileUrls: string[];
 }
 
 export interface ISubmitButtonProps {

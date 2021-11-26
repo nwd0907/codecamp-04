@@ -16,6 +16,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
   const [zipcode, setZipcode] = useState("");
   const [address, setAddress] = useState("");
   const [addressDetail, setAddressDetail] = useState("");
+  const [fileUrls, setFileUrls] = useState(["", "", ""]);
 
   const [myWriterError, setMyWriterError] = useState("");
   const [myPasswordError, setMyPasswordError] = useState("");
@@ -145,6 +146,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
               address: address,
               addressDetail: addressDetail,
             },
+            images: fileUrls,
           },
         },
       });
@@ -165,7 +167,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       return;
     }
 
-    const myUpdateboardInput: IMyUpdateBoardInput = {};
+    const myUpdateboardInput: IMyUpdateBoardInput = { images: fileUrls };
     if (myTitle) myUpdateboardInput.title = myTitle;
     if (myContents) myUpdateboardInput.contents = myContents;
     if (youtubeUrl) myUpdateboardInput.youtubeUrl = youtubeUrl;
@@ -191,6 +193,12 @@ export default function BoardWrite(props: IBoardWriteProps) {
     }
   }
 
+  function onChangeFileUrls(fileUrl: string, index: number) {
+    const newFileUrls = [...fileUrls];
+    newFileUrls[index] = fileUrl;
+    setFileUrls(newFileUrls);
+  }
+
   return (
     <BoardWriteUI
       myWriterError={myWriterError}
@@ -207,6 +215,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       onClickUpdate={onClickUpdate}
       onClickAddressSearch={onClickAddressSearch}
       onCompleteAddressSearch={onCompleteAddressSearch}
+      onChangeFileUrls={onChangeFileUrls}
       isActive={isActive}
       isEdit={props.isEdit}
       isOpen={isOpen}
@@ -214,6 +223,7 @@ export default function BoardWrite(props: IBoardWriteProps) {
       zipcode={zipcode}
       address={address}
       addressDetail={addressDetail}
+      fileUrls={fileUrls}
     />
   );
 }
