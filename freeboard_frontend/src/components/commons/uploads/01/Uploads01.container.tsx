@@ -8,7 +8,7 @@ import { Modal } from "antd";
 
 export default function Uploads01(props: IUploads01Props) {
   const fileRef = useRef<HTMLInputElement>(null);
-  const [uploadFile] = useMutation(UPLOAD_FILE); // 1차 실습
+  const [uploadFile] = useMutation(UPLOAD_FILE);
 
   function onClickUpload() {
     fileRef.current?.click();
@@ -30,6 +30,7 @@ export default function Uploads01(props: IUploads01Props) {
     <Uploads01UI
       fileRef={fileRef}
       fileUrl={props.fileUrl}
+      defaultFileUrl={props.defaultFileUrl}
       onClickUpload={onClickUpload}
       onChangeFile={onChangeFile}
     />
