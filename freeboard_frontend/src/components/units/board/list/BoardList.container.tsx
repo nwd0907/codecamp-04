@@ -12,11 +12,12 @@ import {
 export default function BoardList() {
   const router = useRouter();
   const [startPage, setStartPage] = useState(1);
+  const [keyword, setKeyword] = useState("");
   const { data, refetch } = useQuery<
     Pick<IQuery, "fetchBoards">,
     IQueryFetchBoardsArgs
   >(FETCH_BOARDS, { variables: { page: startPage } });
-  const { data: dataBoardsCount } =
+  const { data: dataBoardsCount, refetch: refetchBoardsCount } =
     useQuery<Pick<IQuery, "fetchBoardsCount">, IQueryFetchBoardsCountArgs>(
       FETCH_BOARDS_COUNT
     );
@@ -30,15 +31,22 @@ export default function BoardList() {
       router.push(`/boards/${event.target.id}`);
   }
 
+  function onChangeKeyword(value: string) {
+    setKeyword(value);
+  }
+
   return (
     <BoardListUI
       data={data}
       onClickMoveToBoardNew={onClickMoveToBoardNew}
       onClickMoveToBoardDetail={onClickMoveToBoardDetail}
       refetch={refetch}
+      refetchBoardsCount={refetchBoardsCount}
       count={dataBoardsCount?.fetchBoardsCount}
       startPage={startPage}
       setStartPage={setStartPage}
+      keyword={keyword}
+      onChangeKeyword={onChangeKeyword}
     />
   );
 }
