@@ -104,8 +104,7 @@ createConnection({
   password: "codecamp",
   host: "34.64.207.239",
   port: 3301,
-  // @ts-ignore
-  entities: [__dirname + "/*.mysql.ts"],
+  entities: ["./*.mysql.ts"],
   logging: true,
   synchronize: true,
 })
