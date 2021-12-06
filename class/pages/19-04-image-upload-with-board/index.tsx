@@ -1,5 +1,10 @@
 import { gql, useMutation } from "@apollo/client";
 import { ChangeEvent, useState } from "react";
+import {
+  IMutation,
+  IMutationCreateBoardArgs,
+  IMutationUploadFileArgs,
+} from "../../src/commons/types/generated/types";
 
 const UPLOAD_FILE = gql`
   mutation uploadFile($file: Upload!) {
@@ -27,8 +32,14 @@ export default function ImageUploadPage() {
   const [myTitle, setMyTitle] = useState("");
   const [myContents, setMyContents] = useState("");
   const [myImages, setMyImages] = useState<string[]>([]);
-  const [uploadFile] = useMutation(UPLOAD_FILE);
-  const [createBoard] = useMutation(CREATE_BOARD);
+  const [uploadFile] = useMutation<
+    Pick<IMutation, "uploadFile">,
+    IMutationUploadFileArgs
+  >(UPLOAD_FILE);
+  const [createBoard] = useMutation<
+    Pick<IMutation, "createBoard">,
+    IMutationCreateBoardArgs
+  >(CREATE_BOARD);
 
   function onChangeMyWriter(event: ChangeEvent<HTMLInputElement>) {
     setMyWriter(event.target.value);
@@ -47,18 +58,22 @@ export default function ImageUploadPage() {
   }
 
   async function onClickSubmit() {
-    const result = await createBoard({
-      variables: {
-        createBoardInput: {
-          writer: myWriter,
-          password: myPassword,
-          title: myTitle,
-          contents: myContents,
-          images: myImages,
+    try {
+      const result = await createBoard({
+        variables: {
+          createBoardInput: {
+            writer: myWriter,
+            password: myPassword,
+            title: myTitle,
+            contents: myContents,
+            images: myImages,
+          },
         },
-      },
-    });
-    console.log(result);
+      });
+      console.log(result);
+    } catch (error) {
+      alert(error.message);
+    }
   }
 
   async function onChangeFile(event: ChangeEvent<HTMLInputElement>) {
@@ -80,13 +95,19 @@ export default function ImageUploadPage() {
       return;
     }
 
-    const result = await uploadFile({
-      variables: {
-        file: myFile,
-      },
-    });
-    console.log(result.data.uploadFile.url);
-    setMyImages([result.data.uploadFile.url]);
+    try {
+      const result = await uploadFile({
+        variables: {
+          file: myFile,
+        },
+      });
+      console.log(result.data?.uploadFile.url);
+      if (!result.data) throw new Error("업로드에 실패했습니다.");
+
+      setMyImages([result.data?.uploadFile.url]);
+    } catch (error) {
+      alert(error.message);
+    }
   }
 
   return (

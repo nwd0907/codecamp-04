@@ -1,5 +1,9 @@
 import { gql, useMutation } from "@apollo/client";
 import { ChangeEvent } from "react";
+import {
+  IMutation,
+  IMutationUploadFileArgs,
+} from "../../src/commons/types/generated/types";
 
 const UPLOAD_FILE = gql`
   mutation uploadFile($file: Upload!) {
@@ -10,7 +14,10 @@ const UPLOAD_FILE = gql`
 `;
 
 export default function ImageUploadPage() {
-  const [uploadFile] = useMutation(UPLOAD_FILE);
+  const [uploadFile] = useMutation<
+    Pick<IMutation, "uploadFile">,
+    IMutationUploadFileArgs
+  >(UPLOAD_FILE);
 
   async function onChangeFile(event: ChangeEvent<HTMLInputElement>) {
     const myFile = event.target.files?.[0];
@@ -21,7 +28,7 @@ export default function ImageUploadPage() {
         file: myFile,
       },
     });
-    console.log(result.data.uploadFile.url);
+    console.log(result.data?.uploadFile.url);
   }
 
   return <input type="file" onChange={onChangeFile} />;
