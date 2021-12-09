@@ -30,6 +30,8 @@ export default function MyLifecyclePage() {
     router.push("/");
   }
 
+  console.log("이건 언제 실행될까요?!"); // componentDidMount 또는 useEffect 와의 실행순서 비교
+
   return (
     <>
       <input type="text" ref={inputRef} />
